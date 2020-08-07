@@ -1,20 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
-import './App.css'
-import Person from './Person/Person'
 
-const StyledButton = styled.button`
-  background-color: ${(props) => (props.alt ? 'red' : 'green')};
-  color: white;
-  font: inherit;
-  border: 1px solid blue;
-  padding: 8px;
-  cursor: pointer;
-  &:hover {
-    background-color: ${(props) => (props.alt ? 'salmon' : 'lightgreen')};
-    color: black;
-  }
-`
+import styles from './App.module.css'
+import Person from './Person/Person'
 
 class App extends React.Component {
   state = {
@@ -52,7 +39,7 @@ class App extends React.Component {
     this.setState({ showPeople: !currentDisplayState })
   }
 
-  displayPeople = (style) => {
+  displayPeople = () => {
     let people = null
     // passing an anon function is inefficient, use bind instead if needs be
     if (this.state.showPeople) {
@@ -77,19 +64,22 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className={styles.App}>
         <h1>Hello</h1>
         <p
           className={[
-            this.state.people.length <= 2 ? 'red' : '',
-            this.state.people.length <= 1 ? 'bold' : '',
+            this.state.people.length <= 2 ? styles.red : '',
+            this.state.people.length <= 1 ? styles.bold : '',
           ].join(' ')}
         >
           Messing around with styles
         </p>
-        <StyledButton alt={this.state.showPeople} onClick={this.togglePeopleHandler}>
+        <button
+          className={this.state.showPeople ? [styles.Button, styles.Red].join(' ') : styles.Button}
+          onClick={this.togglePeopleHandler}
+        >
           Toggle People
-        </StyledButton>
+        </button>
         {this.displayPeople()}
       </div>
     )
