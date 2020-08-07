@@ -1,7 +1,20 @@
 import React from 'react'
+import styled from 'styled-components'
 import './App.css'
 import Person from './Person/Person'
-import Radium, { StyleRoot } from 'radium'
+
+const StyledButton = styled.button`
+  background-color: ${(props) => (props.alt ? 'red' : 'green')};
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+  &:hover {
+    background-color: ${(props) => (props.alt ? 'salmon' : 'lightgreen')};
+    color: black;
+  }
+`
 
 class App extends React.Component {
   state = {
@@ -58,50 +71,29 @@ class App extends React.Component {
           })}
         </div>
       )
-
-      style.backgroundColor = 'red'
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black',
-      }
     }
     return people
   }
 
   render() {
-    let style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black',
-      },
-    }
-
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Hello</h1>
-          <p
-            className={[
-              this.state.people.length <= 2 ? 'red' : '',
-              this.state.people.length <= 1 ? 'bold' : '',
-            ].join(' ')}
-          >
-            Messing around with styles
-          </p>
-          <button style={style} onClick={this.togglePeopleHandler}>
-            Toggle People
-          </button>
-          {this.displayPeople(style)}
-        </div>
-      </StyleRoot>
+      <div className="App">
+        <h1>Hello</h1>
+        <p
+          className={[
+            this.state.people.length <= 2 ? 'red' : '',
+            this.state.people.length <= 1 ? 'bold' : '',
+          ].join(' ')}
+        >
+          Messing around with styles
+        </p>
+        <StyledButton alt={this.state.showPeople} onClick={this.togglePeopleHandler}>
+          Toggle People
+        </StyledButton>
+        {this.displayPeople()}
+      </div>
     )
   }
 }
 
-export default Radium(App)
+export default App
