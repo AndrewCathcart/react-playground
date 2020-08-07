@@ -40,7 +40,7 @@ class App extends React.Component {
     this.setState({ showPeople: !currentDisplayState });
   };
 
-  displayPeople = () => {
+  displayPeople = (style) => {
     let people = null;
     // passing an anon function is inefficient, use bind instead if needs be
     if (this.state.showPeople) {
@@ -59,14 +59,16 @@ class App extends React.Component {
           })}
         </div>
       );
-    }
 
+      style.backgroundColor = "red";
+    }
     return people;
   };
 
   render() {
-    const style = {
-      backgroundColor: "white",
+    let style = {
+      backgroundColor: "green",
+      color: "white",
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
@@ -76,10 +78,18 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Hello</h1>
+        <p
+          className={[
+            this.state.people.length <= 2 ? "red" : "",
+            this.state.people.length <= 1 ? "bold" : "",
+          ].join(" ")}
+        >
+          Messing around with styles
+        </p>
         <button style={style} onClick={this.togglePeopleHandler}>
           Toggle People
         </button>
-        {this.displayPeople()}
+        {this.displayPeople(style)}
       </div>
     );
   }
