@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styles from './App.module.css'
-import Person from './Person/Person'
+import People from '../components/People/People'
 
 class App extends React.Component {
   state = {
@@ -41,24 +41,18 @@ class App extends React.Component {
 
   displayPeople = () => {
     let people = null
-    // passing an anon function is inefficient, use bind instead if needs be
     if (this.state.showPeople) {
       people = (
         <div>
-          {this.state.people.map((person, index) => {
-            return (
-              <Person
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                click={() => this.deletePersonHandler(index)}
-                change={(event) => this.changeNameHandler(event, person.id)}
-              />
-            )
-          })}
+          <People
+            people={this.state.people}
+            clicked={this.deletePersonHandler}
+            changed={this.changeNameHandler}
+          />
         </div>
       )
     }
+
     return people
   }
 
