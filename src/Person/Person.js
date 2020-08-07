@@ -1,5 +1,6 @@
-import React from "react";
-import "./Person.css";
+import React from 'react'
+import Radium from 'radium'
+import './Person.css'
 
 const person = (props) => {
   return (
@@ -10,7 +11,7 @@ const person = (props) => {
       <p>{props.children}</p>
       <input type="text" onChange={props.change} value={props.name} />
     </div>
-  );
-};
+  )
+}
 
-export default person;
+export default Radium(person)
