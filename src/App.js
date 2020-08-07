@@ -1,47 +1,45 @@
-import React from "react";
-import "./App.css";
-import Person from "./Person/Person";
+import React from 'react'
+import './App.css'
+import Person from './Person/Person'
 
 class App extends React.Component {
   state = {
     people: [
-      { id: "dfgads13", name: "Andy", age: 25 },
-      { id: "sdfsdfg2a", name: "Bob", age: 21 },
-      { id: "dfghfgzzxc", name: "George", age: 23 },
+      { id: 'dfgads13', name: 'Andy', age: 25 },
+      { id: 'sdfsdfg2a', name: 'Bob', age: 21 },
+      { id: 'dfghfgzzxc', name: 'George', age: 23 },
     ],
     showPeople: false,
-  };
+  }
 
   // Always update state immutably
   deletePersonHandler = (personIndex) => {
-    const people = [...this.state.people];
-    people.splice(personIndex, 1);
-    this.setState({ people: people });
-  };
+    const people = [...this.state.people]
+    people.splice(personIndex, 1)
+    this.setState({ people: people })
+  }
 
   changeNameHandler = (event, id) => {
-    const personIndex = this.state.people.findIndex(
-      (person) => person.id === id
-    );
+    const personIndex = this.state.people.findIndex((person) => person.id === id)
 
     // Get inputted name
-    const person = { ...this.state.people[personIndex] };
-    person.name = event.target.value;
+    const person = { ...this.state.people[personIndex] }
+    person.name = event.target.value
 
     // Get current state and update the person object
-    const people = [...this.state.people];
-    people[personIndex] = person;
+    const people = [...this.state.people]
+    people[personIndex] = person
 
-    this.setState({ people: people });
-  };
+    this.setState({ people: people })
+  }
 
   togglePeopleHandler = () => {
-    const currentDisplayState = this.state.showPeople;
-    this.setState({ showPeople: !currentDisplayState });
-  };
+    const currentDisplayState = this.state.showPeople
+    this.setState({ showPeople: !currentDisplayState })
+  }
 
   displayPeople = (style) => {
-    let people = null;
+    let people = null
     // passing an anon function is inefficient, use bind instead if needs be
     if (this.state.showPeople) {
       people = (
@@ -55,34 +53,34 @@ class App extends React.Component {
                 click={() => this.deletePersonHandler(index)}
                 change={(event) => this.changeNameHandler(event, person.id)}
               />
-            );
+            )
           })}
         </div>
-      );
+      )
 
-      style.backgroundColor = "red";
+      style.backgroundColor = 'red'
     }
-    return people;
-  };
+    return people
+  }
 
   render() {
     let style = {
-      backgroundColor: "green",
-      color: "white",
-      font: "inherit",
-      border: "1px solid blue",
-      padding: "8px",
-      cursor: "pointer",
-    };
+      backgroundColor: 'green',
+      color: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer',
+    }
 
     return (
       <div className="App">
         <h1>Hello</h1>
         <p
           className={[
-            this.state.people.length <= 2 ? "red" : "",
-            this.state.people.length <= 1 ? "bold" : "",
-          ].join(" ")}
+            this.state.people.length <= 2 ? 'red' : '',
+            this.state.people.length <= 1 ? 'bold' : '',
+          ].join(' ')}
         >
           Messing around with styles
         </p>
@@ -91,8 +89,8 @@ class App extends React.Component {
         </button>
         {this.displayPeople(style)}
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
