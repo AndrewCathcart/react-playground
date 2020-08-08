@@ -2,8 +2,14 @@ import React from 'react'
 
 import styles from './App.module.css'
 import People from '../components/People/People'
+import ControlCenter from '../components/ControlCenter/ControlCenter'
 
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+    console.log('[App.js] constructor')
+  }
+
   state = {
     people: [
       { id: 'dfgads13', name: 'Andy', age: 25 },
@@ -11,6 +17,15 @@ class App extends React.Component {
       { id: 'dfghfgzzxc', name: 'George', age: 23 },
     ],
     showPeople: false,
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props)
+    return state
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount')
   }
 
   // Always update state immutably
@@ -41,15 +56,14 @@ class App extends React.Component {
 
   displayPeople = () => {
     let people = null
+
     if (this.state.showPeople) {
       people = (
-        <div>
-          <People
-            people={this.state.people}
-            clicked={this.deletePersonHandler}
-            changed={this.changeNameHandler}
-          />
-        </div>
+        <People
+          people={this.state.people}
+          clicked={this.deletePersonHandler}
+          changed={this.changeNameHandler}
+        />
       )
     }
 
@@ -57,23 +71,14 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('[App.js] render')
     return (
       <div className={styles.App}>
-        <h1>Hello</h1>
-        <p
-          className={[
-            this.state.people.length <= 2 ? styles.red : '',
-            this.state.people.length <= 1 ? styles.bold : '',
-          ].join(' ')}
-        >
-          Messing around with styles
-        </p>
-        <button
-          className={this.state.showPeople ? [styles.Button, styles.Red].join(' ') : styles.Button}
-          onClick={this.togglePeopleHandler}
-        >
-          Toggle People
-        </button>
+        <ControlCenter
+          showPeople={this.state.showPeople}
+          people={this.state.people}
+          clicked={this.togglePeopleHandler}
+        />
         {this.displayPeople()}
       </div>
     )
