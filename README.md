@@ -1,3 +1,7 @@
+# react-playground
+
+A brief project in order to teach myself the capabilities and various features of React
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

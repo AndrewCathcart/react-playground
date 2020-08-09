@@ -3,13 +3,9 @@ import React from 'react'
 import styles from './App.module.css'
 import People from '../components/People/People'
 import ControlCenter from '../components/ControlCenter/ControlCenter'
+import WithClass from '../hoc/WithClass'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-    console.log('[App.js] constructor')
-  }
-
   state = {
     people: [
       { id: 'dfgads13', name: 'Andy', age: 25 },
@@ -17,15 +13,6 @@ class App extends React.Component {
       { id: 'dfghfgzzxc', name: 'George', age: 23 },
     ],
     showPeople: false,
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    console.log('[App.js] getDerivedStateFromProps', props)
-    return state
-  }
-
-  componentDidMount() {
-    console.log('[App.js] componentDidMount')
   }
 
   // Always update state immutably
@@ -73,14 +60,14 @@ class App extends React.Component {
   render() {
     console.log('[App.js] render')
     return (
-      <div className={styles.App}>
+      <WithClass classes={styles.App}>
         <ControlCenter
           showPeople={this.state.showPeople}
           people={this.state.people}
           clicked={this.togglePeopleHandler}
         />
         {this.displayPeople()}
-      </div>
+      </WithClass>
     )
   }
 }

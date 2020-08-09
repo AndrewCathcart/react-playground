@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './ControlCenter.module.css'
 
-const controlCenter = (props) => {
+const ControlCenter = (props) => {
   return (
     <div className={styles.ControlCenter}>
       <h1>Hello</h1>
@@ -20,4 +20,4 @@ const controlCenter = (props) => {
   )
 }
 
-export default controlCenter
+export default ControlCenter
